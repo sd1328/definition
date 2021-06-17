@@ -1,0 +1,31 @@
+{
+  "name": "sd1328/definition",
+  "type": "library",
+  "description": "Definition, reference book for PHP",
+  "keywords": ["library", "php", "enum", "reference book"],
+  "license": "MIT",
+  "version": "1.0",
+  "authors": [
+    {
+      "name": "Aleksey Gudz",
+      "email": "sd1328@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "7.4.*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Sd1328\\Definition\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Sd1328\\Definition\\Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  }
+}
