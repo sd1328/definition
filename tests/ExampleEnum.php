@@ -8,7 +8,6 @@ use Sd1328\Definition\Enum;
 
 class ExampleEnum extends Enum
 {
-
     protected static function filterUsedValues(int $key): bool
     {
         return true;

@@ -21,10 +21,19 @@ abstract class AbstractDefinition
     private static array $referenceStorage = [];
 
     /**
-     * Получение коллекции справочника
-     * @return null|array
+     * Данные справочника:
+     *  [
+     *      (int|float|string) value => [
+     *          'name' => (string) name,
+     *          'someField' => 'someValue'
+     *          ....
+     *      ],
+     *      ...
+     *  ]
+     * @param ReflectionClass $reflection
+     * @return iterable
      */
-    abstract protected static function getCustomDefinitionData(): ?array;
+    abstract protected static function getDefinitionData(ReflectionClass $reflection): iterable;
 
     /**
      * Метод реализует фильтр удаленных элементов,
@@ -89,57 +98,15 @@ abstract class AbstractDefinition
     }
 
     /**
-     * Данные справочника по умолчанию - минимальный набор (enumeration list):
-     *  [
-     *      (int|float|string) value => [
-     *          'name' => (string) name
-     *      ],
-     *      ...
-     *  ]
-     * @param ReflectionClass $reflectionClass
-     * @return Generator
-     */
-    private static function getDefaultDefinitionData(ReflectionClass $reflectionClass): Generator
-    {
-        foreach ($reflectionClass->getConstants() as $constantName => $constantValue) {
-            yield $constantValue => ['name' => $constantName];
-        }
-    }
-
-    /**
-     * Данные справочника:
-     *  [
-     *      (int|float|string) value => [
-     *          'name' => (string) name,
-     *          'someField' => 'someValue'
-     *          ....
-     *      ],
-     *      ...
-     *  ]
-     * @return null|array
-     */
-    private static function getDefinitionData(ReflectionClass $reflectionClass): array
-    {
-        $customCollection = static::getCustomDefinitionData();
-        if ($customCollection === null) {
-            return iterator_to_array(
-                self::getDefaultDefinitionData($reflectionClass)
-            );
-        }
-        return $customCollection;
-    }
-
-    /**
      * Получение коллекции справочника
      * @return array
      */
     private static function buildList(): array
     {
-        $reflection = new ReflectionClass(static::class);
-
         $class = static::class;
+        $reflection = new ReflectionClass($class);
         $list = [];
-        foreach (self::getDefinitionData($reflection) as $value => $fields) {
+        foreach (static::getDefinitionData($reflection) as $value => $fields) {
             $definitionItem = new $class();
             $fields = $fields + ['value' => $value];
             foreach ($fields as $fieldName => $fieldValue) {
