@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace Sd1328\Definition;
 
+/**
+ * Class Query
+ * @package Sd1328\Definition
+ */
 class Query
 {
     private string $definitionClass;
