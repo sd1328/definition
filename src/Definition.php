@@ -42,6 +42,11 @@ abstract class Definition extends AbstractDefinition
         throw new IncorrectSpecificationException("Property $name not define");
     }
 
+    public function isUsed(): bool
+    {
+        return static::filterUsedValues($this->value);
+    }
+
     /**
      * @param string $name
      * @param array $arguments
@@ -58,8 +63,11 @@ abstract class Definition extends AbstractDefinition
         throw new InvalidArgumentException("$name");
     }
 
-    public function isUsed(): bool
+    /**
+     * @return Query
+     */
+    public static function select(): Query
     {
-        return static::filterUsedValues($this->value);
+        return new Query(static::class);
     }
 }
