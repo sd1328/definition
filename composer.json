@@ -4,7 +4,7 @@
   "description": "Definition, reference book for PHP",
   "keywords": ["library", "php", "enum", "reference book"],
   "license": "Apache-2.0",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "authors": [
     {
       "name": "Aleksey Gudz",
