@@ -38,10 +38,10 @@ abstract class AbstractDefinition
     /**
      * Метод реализует фильтр удаленных элементов,
      * для удаленного элемента возвращает FALSE иначе TRUE
-     * @param int $key
+     * @param int|string|float $key
      * @return bool
      */
-    abstract protected static function filterUsedValues(int $key): bool;
+    abstract protected static function filterUsedValues($key): bool;
 
     /**
      * Получение коллекции объектов справочника
