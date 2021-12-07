@@ -46,7 +46,7 @@ class PhpType extends Enum
         return self::get($type);
     }
 
-    protected static function filterUsedValues(int $key): bool
+    protected static function filterUsedValues($key): bool
     {
         return true;
     }
